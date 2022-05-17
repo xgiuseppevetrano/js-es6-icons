@@ -13,15 +13,13 @@
 /*---------------
 	FUNCTIONS
 ---------------*/
+// Funzione che crea e stampa in html i box delle icone
 function printIcon(container, object) {
-    const icon = `
-		<div class="icon-box">
-			<i class="${object.family} ${object.prefix}${object.name}" style="color: ${object.color};"></i>
-			<h6 class="ico-name">${object.name}</h6>
-		</div>
-    `;
-
-    container.innerHTML += icon;
+    const icon = document.querySelector("#tpl-icon").content.cloneNode(true);
+	icon.querySelector(".icon-box i").classList.add(object.family, object.prefix + object.name);
+	icon.querySelector(".icon-box i").style.color = object.color;
+	icon.querySelector(".icon-name").innerHTML = object.name;
+	container.append(icon);
 }
 
 /*------------
