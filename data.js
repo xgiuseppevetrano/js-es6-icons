@@ -4,15 +4,10 @@
 // Ciascuna icona ha una proprietà "color": utilizzare questa proprietà per visualizzare le icone del colore corrispondente.
 // Milestone 3
 // Aggiungere alla pagina una select in cui le options corrispondono ai vari tipi di icone (animal, vegetable, user). Quando l'utente seleziona un tipo dalla select, visualizzare solamente le icone corrispondenti.
+
 // BONUS
 // 1- modificare la struttura dati fornita e valorizzare la proprietà "color" in modo dinamico: generare in modo casuale un codice colore, sapendo che la notazione esadecimale è formata dal simbolo "#" seguito da 6 caratteri alfanumerici compresi tra 0 e 9 e A e F.
 // 2- popolare le options della select della milestone 3 dinamicamente.
-// Consigli del giorno
-// Come sempre, iniziamo prima di tutto dall'analisi e comprensione della consegna. Scomponiamo il problema in micro-passaggi logici che solamente in un secondo momento trasformeremo in codice.
-// Le icone presenti nella struttura dati fanno riferimento alla nota libreria Font Awesome, perciò come prima cosa assicuriamoci di aver inserito il link alla cdn nell'head della pagina.
-// Dopodiché, basandoci sul codice di riferimento nel sito di Font Awesome, analizziamo come è formato il tag <i> di un'icona qualsiasi, in particolare focalizziamoci sulle classi.
-// Come possiamo usare i dati presenti nella nostra struttura dati per creare l'elemento html nel modo corretto e visualizzare l'icona in pagina?
-// Inizialmente può essere sufficiente stampare dei semplici div, senza alcuno stile, con all'interno l'icona e uno span con il nome. Solamente quando la parte logica è completa, ci dedichiamo al css.
 
 
 /*---------------
@@ -151,39 +146,37 @@ const icons = [
 // 2. Prendo il container dall'HTML
 const iconContainer = document.querySelector(".icon-container");
 
-// 3. Con un ciclo for creo tutti i vari post
-for (let i = 0; i < icons.length; i++) {
-	printIcon(iconContainer, icons[i]);
-}
+// 3. Con un ciclo forEach creo tutti i vari post
+icons.forEach((elm) => printIcon(iconContainer, elm));
 
 // 4. Creo un evento al cambio della select
 const selectElement = document.querySelector("#typo");
 
 selectElement.addEventListener('change', 
 	function (event) {
-		if (event.target.value === "base") {
+		// SE il value della select è uguale a all
+		// ALLORA stampo in html tutte le icone
+		if (event.target.value === "all") {
 			iconContainer.innerHTML = " ";
-			for (let i = 0; i < icons.length; i++) {
-				printIcon(iconContainer, icons[i]);
-			}
+			icons.forEach((elm) => printIcon(iconContainer, elm));
+			// SE il value della select è uguale a animal
+			// ALLORA stampo in html le icone con typo = "animal"
 		} else if (event.target.value === "animal") {
 			iconContainer.innerHTML = " ";
 			const animalIcons = icons.filter(elm => elm.type === 'animal');
-			for (let i = 0; i < animalIcons.length; i++) {
-				printIcon(iconContainer, animalIcons[i]);
-			}
+			animalIcons.forEach((elm) => printIcon(iconContainer, elm));
+			// SE il value della select è uguale a vegetable
+			// ALLORA stampo in html le icone con typo = "vegetable"
 		} else if (event.target.value === "vegetable") {
 			iconContainer.innerHTML = " ";
 			const vegetableIcons = icons.filter(elm => elm.type === 'vegetable');
-			for (let i = 0; i < vegetableIcons.length; i++) {
-				printIcon(iconContainer, vegetableIcons[i]);
-			}
+			vegetableIcons.forEach((elm) => printIcon(iconContainer, elm));
+			// SE il value della select è uguale a user
+			// ALLORA stampo in html le icone con typo = "user"
 		} else if (event.target.value === "user") {
 			iconContainer.innerHTML = " ";
 			const userIcons = icons.filter(elm => elm.type === 'user');
-			for (let i = 0; i < userIcons.length; i++) {
-				printIcon(iconContainer, userIcons[i]);
-			}
+			userIcons.forEach((elm) => printIcon(iconContainer, elm));
 		}
 	}
 );
