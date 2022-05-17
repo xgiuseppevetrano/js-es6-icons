@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.header-top h1 {
+    color: #29b1dd;
+    padding: 15px;
+}
+
+.header-bottom {
+    background-color: #29b1dd;
+    text-align: center;
+    padding: 20px;
+    color: white;
+}
+
+main {
+    background-color: #dddddd;
+}
