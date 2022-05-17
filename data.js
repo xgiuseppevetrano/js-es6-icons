@@ -14,7 +14,12 @@
 // Come possiamo usare i dati presenti nella nostra struttura dati per creare l'elemento html nel modo corretto e visualizzare l'icona in pagina?
 // Inizialmente può essere sufficiente stampare dei semplici div, senza alcuno stile, con all'interno l'icona e uno span con il nome. Solamente quando la parte logica è completa, ci dedichiamo al css.
 
-[
+
+/*------------
+	MAIN
+------------*/
+// 1. Creo un array di oggetti
+const icons = [
 	{
 		name: 'cat',
 		prefix: 'fa-',
@@ -128,3 +133,18 @@
 		color: 'blue'
 	}
 ];
+
+// 2. Prendo il container dall'HTML
+const container = document.querySelector(".icon-container");
+
+// 3. Con un ciclo for creo tutti i vari post
+for (let i = 0; i < icons.length; i++) {
+    const icon = `
+		<div id="icon-box">
+			<i class="fa-solid ${icons[i].prefix}${icons[i].name}" style="color: ${icons[i].color};"></i>
+			<h6 class="ico-name">${icons[i].name}</h6>
+		</div>
+    `;
+
+    container.innerHTML += icon;
+};
