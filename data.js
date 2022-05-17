@@ -15,6 +15,20 @@
 // Inizialmente può essere sufficiente stampare dei semplici div, senza alcuno stile, con all'interno l'icona e uno span con il nome. Solamente quando la parte logica è completa, ci dedichiamo al css.
 
 
+/*---------------
+	FUNCTIONS
+---------------*/
+function printIcon(container, object) {
+    const icon = `
+		<div class="icon-box">
+			<i class="${object.family} ${object.prefix}${object.name}" style="color: ${object.color};"></i>
+			<h6 class="ico-name">${object.name}</h6>
+		</div>
+    `;
+
+    container.innerHTML += icon;
+}
+
 /*------------
 	MAIN
 ------------*/
@@ -135,16 +149,41 @@ const icons = [
 ];
 
 // 2. Prendo il container dall'HTML
-const container = document.querySelector(".icon-container");
+const iconContainer = document.querySelector(".icon-container");
 
 // 3. Con un ciclo for creo tutti i vari post
 for (let i = 0; i < icons.length; i++) {
-    const icon = `
-		<div id="icon-box">
-			<i class="fa-solid ${icons[i].prefix}${icons[i].name}" style="color: ${icons[i].color};"></i>
-			<h6 class="ico-name">${icons[i].name}</h6>
-		</div>
-    `;
+	printIcon(iconContainer, icons[i]);
+}
 
-    container.innerHTML += icon;
-};
+// 4. Creo un evento al cambio della select
+const selectElement = document.querySelector("#typo");
+
+selectElement.addEventListener('change', 
+	function (event) {
+		if (event.target.value === "base") {
+			iconContainer.innerHTML = " ";
+			for (let i = 0; i < icons.length; i++) {
+				printIcon(iconContainer, icons[i]);
+			}
+		} else if (event.target.value === "animal") {
+			iconContainer.innerHTML = " ";
+			const animalIcons = icons.filter(elm => elm.type === 'animal');
+			for (let i = 0; i < animalIcons.length; i++) {
+				printIcon(iconContainer, animalIcons[i]);
+			}
+		} else if (event.target.value === "vegetable") {
+			iconContainer.innerHTML = " ";
+			const vegetableIcons = icons.filter(elm => elm.type === 'vegetable');
+			for (let i = 0; i < vegetableIcons.length; i++) {
+				printIcon(iconContainer, vegetableIcons[i]);
+			}
+		} else if (event.target.value === "user") {
+			iconContainer.innerHTML = " ";
+			const userIcons = icons.filter(elm => elm.type === 'user');
+			for (let i = 0; i < userIcons.length; i++) {
+				printIcon(iconContainer, userIcons[i]);
+			}
+		}
+	}
+);
