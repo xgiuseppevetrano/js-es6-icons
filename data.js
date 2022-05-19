@@ -151,30 +151,12 @@ icons.forEach((elm) => printIcon(iconContainer, elm));
 const selectElement = document.querySelector("#typo");
 
 selectElement.addEventListener('change', 
-	function (event) {
-		// SE il value della select è uguale a all
-		// ALLORA stampo in html tutte le icone
-		if (event.target.value === "all") {
-			iconContainer.innerHTML = " ";
-			icons.forEach((elm) => printIcon(iconContainer, elm));
-			// SE il value della select è uguale a animal
-			// ALLORA stampo in html le icone con typo = "animal"
-		} else if (event.target.value === "animal") {
-			iconContainer.innerHTML = " ";
-			const animalIcons = icons.filter(elm => elm.type === 'animal');
-			animalIcons.forEach((elm) => printIcon(iconContainer, elm));
-			// SE il value della select è uguale a vegetable
-			// ALLORA stampo in html le icone con typo = "vegetable"
-		} else if (event.target.value === "vegetable") {
-			iconContainer.innerHTML = " ";
-			const vegetableIcons = icons.filter(elm => elm.type === 'vegetable');
-			vegetableIcons.forEach((elm) => printIcon(iconContainer, elm));
-			// SE il value della select è uguale a user
-			// ALLORA stampo in html le icone con typo = "user"
-		} else if (event.target.value === "user") {
-			iconContainer.innerHTML = " ";
-			const userIcons = icons.filter(elm => elm.type === 'user');
-			userIcons.forEach((elm) => printIcon(iconContainer, elm));
-		}
+	function () {
+		// 4a. Filtro le icone in base al type === al valore della select o se la select è uguale ad "all"
+		let iconsFiltered = icons.filter(elm => elm.type === selectElement.value || selectElement.value==="all");
+		// 4b. Pulisco il container
+		iconContainer.innerHTML = " ";
+		// 4c. Stampo le icone filtrate
+		iconsFiltered.forEach((elm) => printIcon(iconContainer, elm));
 	}
 );
